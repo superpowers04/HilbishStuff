@@ -12,13 +12,13 @@ usage: cat [file]...]]
 		local f = io.open(fName)
 		if f == nil then
 			exit = 1
-			sinks.out:writeln(('cat: %s: no such file or directory'):format(fName))
+			sinks.out:writeln('cat: ' .. fName .. ': no such file or directory')
 			goto continue
 		end
 		local file,err = f:read('*a')
 		local out = file;
 		if(not out) then
-			out = ("cat: %s: %s"):format(fName,err:gsub('read .-:',''))
+			out = "cat: " .. fName .. ": " .. err:gsub('read .-:','')
 		end
 		sinks.out:writeln(out)
 		::continue::
