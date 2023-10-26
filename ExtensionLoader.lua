@@ -9,6 +9,10 @@
 --  - ~/.local/share/hilbish/extensions/
 --  - ~/.local/share/hilbish/commands/
 --  - ~/.config/hilbish/commands/
+--  or your operating system equivilent
+
+
+-- TO USE: Simply place this in your hilbish config folder and require it in your init.lua
 
 -- Config
 
@@ -20,7 +24,7 @@ local extensionsPath = { -- Add directories to this if you want more locations t
 	hilbish.userDir.config ..'/hilbish/commands',
 	hilbish.userDir.data .. '/hilbish/commands',
 }
-
+local showGreeting = true -- If the extension loader message should be shown. Note if your greeting is nil, it won't be shown anyways
 
 -- Script
 local fs = require('fs')
@@ -49,7 +53,7 @@ for _,extLoc in pairs(extensionsPath) do
 	end
 	::nextExtension::
 end
-local greet = hilbish.opts.greeting
+local greet = showGreeting and hilbish.opts.greeting
 if not greet then return end
 if(greet:find('%[Extension Loader%]')) then
 	greet:gsub("Loaded (%d) extension",function(a)
